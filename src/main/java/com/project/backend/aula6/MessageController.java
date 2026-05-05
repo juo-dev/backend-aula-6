@@ -1,5 +1,6 @@
 package com.project.backend.aula6;
 
+import com.project.backend.aula6.service.MessageService;
 import org.apache.logging.log4j.message.Message;
 import org.springframework.web.bind.annotation.*;
 
@@ -34,11 +35,7 @@ public class MessageController {
     */
     @PutMapping("/{index}")
     public String update(@RequestBody String message, @PathVariable int index) {
-        if (index >= 0 && index < messages.size()) {
-            messages.set(index, message);
-            return "Mensagem atualizada com sucesso!";
-        }
-        return "Índice inválido ou array vazio!";
+        return new MessageService().update(message, index);
     }
 
     @DeleteMapping("/{index}")
