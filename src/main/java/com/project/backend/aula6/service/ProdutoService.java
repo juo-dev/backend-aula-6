@@ -25,10 +25,14 @@ public class ProdutoService {
     }
 
     public Produto atualizarProduto(UUID id, Produto produto) {
-        Produto existente = produtoRepository.findById(id).get();
-        existente.setNome(produto.getNome());
-        existente.setPreco(produto.getPreco());
-        return produtoRepository.save(existente);
+        try {
+            Produto existente = produtoRepository.findById(id).get();
+            existente.setNome(produto.getNome());
+            existente.setPreco(produto.getPreco());
+            return produtoRepository.save(existente);
+        }catch (Exception e){
+            return null;
+        }
     }
 
     public Produto deletarProduto(UUID id) {

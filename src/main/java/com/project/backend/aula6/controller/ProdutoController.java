@@ -33,6 +33,10 @@ public class ProdutoController {
 
     @PutMapping("/{id}")
     public ResponseEntity<Produto> atualizar(@PathVariable UUID id, @RequestBody Produto produto) {
+        Produto result = produtoService.atualizarProduto(id, produto);
+        if (result == null) {
+            return ResponseEntity.notFound().build();
+        }
         return ResponseEntity.ok (produtoService.atualizarProduto(id, produto));
     }
 
